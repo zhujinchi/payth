@@ -4,53 +4,67 @@ import 'package:provider/provider.dart';
 import 'package:payth/home.dart';
 import 'register.dart';
 import 'forget_password.dart';
+import 'package:payth/net/api.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:
-    Center(child: Container(
-      width: 400,
-      height: 500,
-      decoration: BoxDecoration(
-        borderRadius:
-        new BorderRadius.all(new Radius.circular(30.0)),
-        border:Border.all(width: 0.5, color: Colors.black),
+    return Scaffold(
+        body: Center(
+      child: Container(
+        width: 400,
+        height: 500,
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.all(new Radius.circular(30.0)),
+          border: Border.all(width: 0.5, color: Colors.black),
+        ),
+        child: Consumer<UserProvider>(builder: (context, value, child) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 40,
+                child: Text(
+                  'LOGIN',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              EmailInput(value),
+              SizedBox(
+                height: 30,
+              ),
+              PasswordInput(value),
+              forgetPassword(context),
+              SizedBox(
+                height: 60,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RegisterButton(context),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  LoginButton(context, value)
+                ],
+              )
+            ],
+          );
+        }),
       ),
-      child:Consumer<UserProvider>(builder: (context, value, child) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 40,
-              child: Text('LOGIN',style: TextStyle(fontSize: 20),),
-            ),
-            SizedBox(height:40 ,),
-            EmailInput(value),
-            SizedBox(height: 30,),
-            PasswordInput(value),
-            forgetPassword(context),
-            SizedBox(height: 60,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RegisterButton(context),
-                SizedBox(width: 20,),
-                LoginButton(context)
-              ],
-            )
-
-
-          ],
-        );
-      }),) ,
     ));
   }
 }
 
+//邮箱输入框
 var EmailController = TextEditingController();
-Widget EmailInput(UserProvider value){
+
+Widget EmailInput(UserProvider value) {
   return Container(
     height: 60,
     width: 350,
@@ -64,36 +78,37 @@ Widget EmailInput(UserProvider value){
         suffixIcon: (value.email == '')
             ? null
             : IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {
-            EmailController.text = '';
-            value.setEmail('');
-          },
-        ),
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  EmailController.text = '';
+                  value.setEmail('');
+                },
+              ),
         icon: Icon(Icons.person),
         label: Text('Please input Email'),
         border: OutlineInputBorder(
-            borderRadius:
-            BorderRadius.all(Radius.circular(30))),
+            borderRadius: BorderRadius.all(Radius.circular(30))),
       ),
     ),
   );
 }
 
-
-Widget PasswordInput (UserProvider value){
+//密码输入框
+Widget PasswordInput(UserProvider value) {
   return Container(
     height: 60,
     width: 350,
     child: TextField(
-      onChanged: (v){
+      onChanged: (v) {
         value.setPassword(v);
       },
       obscureText: value.passwordShow,
       maxLines: 1,
       decoration: InputDecoration(
         suffixIcon: IconButton(
-          icon: value.passwordShow?Icon(Icons.remove_red_eye_outlined):Icon(Icons.remove_red_eye_rounded),
+          icon: value.passwordShow
+              ? Icon(Icons.remove_red_eye_outlined)
+              : Icon(Icons.remove_red_eye_rounded),
           onPressed: () {
             value.changePasswordShow();
           },
@@ -101,69 +116,79 @@ Widget PasswordInput (UserProvider value){
         icon: Icon(Icons.password_sharp),
         label: Text('Please input password'),
         border: OutlineInputBorder(
-            borderRadius:
-            BorderRadius.all(Radius.circular(30))),
+            borderRadius: BorderRadius.all(Radius.circular(30))),
       ),
     ),
   );
 }
 
-Widget forgetPassword(context){
+//忘记密码
+Widget forgetPassword(context) {
   return Container(
       child: Padding(
-        padding:  EdgeInsets.only(top: 5),
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {
-              // Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgetPasswordView()));
+    padding: EdgeInsets.only(top: 5),
+    child: Align(
+      alignment: Alignment.centerRight,
+      child: TextButton(
+        onPressed: () {
+          // Navigator.pop(context);
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ForgetPasswordView()));
+        },
+        child: Text("forget password?",
+            style: TextStyle(fontSize: 14, color: Colors.grey)),
+      ),
+    ),
+  ));
+}
 
-            },
-            child:  Text("forget password?",
-                style: TextStyle(fontSize: 14, color: Colors.grey)),
-          ),
-        ),
+//注册按钮
+Widget RegisterButton(context) {
+  return ElevatedButton(
+      onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => RegisterView()));
+      },
+      child: Text(
+        'Register',
+        style: TextStyle(fontSize: 20, color: Colors.lightGreen),
+      ),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+        //边框
+        side: MaterialStateProperty.all(
+            BorderSide(color: Colors.lightBlue, width: 0.5)),
+        backgroundColor:
+            MaterialStateProperty.resolveWith((states) => Colors.white),
+        minimumSize: MaterialStateProperty.all(Size(120, 50)),
       ));
 }
 
-Widget RegisterButton(context){
-  return ElevatedButton(onPressed: () {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterView()));
-
-  }, child: Text('Register',style: TextStyle(fontSize: 20,color: Colors.lightGreen),),
+//登录按钮
+Widget LoginButton(context, UserProvider value) {
+  return ElevatedButton(
+      onPressed: () async {
+        var resp = await API().Login(value.email, value.password);
+        if (resp['code'] == 200) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => HomeView()));
+        } else {
+          //  弹框提示账号或密码错误
+        }
+      },
+      child: Text(
+        'Login',
+        style: TextStyle(fontSize: 20, color: Colors.lightGreen),
+      ),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.circular(
-                    20))),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
         //边框
         side: MaterialStateProperty.all(
-            BorderSide(
-                color: Colors.lightBlue,
-                width: 0.5)),
-        backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.white),
-        minimumSize: MaterialStateProperty.all(Size(120,50)),
-      ));
-}
-
-Widget LoginButton(context){
-  return ElevatedButton(onPressed: () {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView()));
-  }, child: Text('Login',style: TextStyle(fontSize: 20,color: Colors.lightGreen),),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.circular(
-                    20))),
-        //边框
-        side: MaterialStateProperty.all(
-            BorderSide(
-                color: Colors.lightBlue,
-                width: 0.5)),
-        backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.white),
-        minimumSize: MaterialStateProperty.all(Size(120,50)),
+            BorderSide(color: Colors.lightBlue, width: 0.5)),
+        backgroundColor:
+            MaterialStateProperty.resolveWith((states) => Colors.white),
+        minimumSize: MaterialStateProperty.all(Size(120, 50)),
       ));
 }

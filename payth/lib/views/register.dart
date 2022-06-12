@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:payth/state/user_login_register.dart';
+import 'package:payth/views/login.dart';
 import 'package:provider/provider.dart';
-import 'package:payth/home.dart';
+import 'package:payth/net/api.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class RegisterView extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              RegisterLoginButton(context),
+              RegisterLoginButton(context,value),
             ],
           );
         }),
@@ -85,6 +86,7 @@ Widget EmailInput(UserProvider value) {
   );
 }
 
+//密码框
 Widget PasswordInput(UserProvider value) {
   return Container(
     height: 60,
@@ -105,13 +107,14 @@ Widget PasswordInput(UserProvider value) {
   );
 }
 
+//确认密码框
 Widget ConfirmPasswordInput(UserProvider value) {
   return Container(
     height: 60,
     width: 350,
     child: TextField(
       onChanged: (v) {
-        value.setPassword(v);
+        value.setConfirmPassword(v);
       },
       obscureText: true,
       maxLines: 1,
@@ -125,14 +128,27 @@ Widget ConfirmPasswordInput(UserProvider value) {
   );
 }
 
-Widget RegisterLoginButton(context) {
+//注册按钮
+Widget RegisterLoginButton(context,UserProvider value) {
   return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomeView()));
+      onPressed: () async {
+        if(value.password==value.confirmPassword){
+          var resp = await API().Register(value.email, value.code, value.password);
+          if(resp['code']==200){
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LoginView()));
+          }
+          else{
+          //  弹窗提示错误
+          }
+        }else{
+        //  弹窗提示两次密码不一样
+        }
+
+
       },
       child: Text(
-        'Register&Login',
+        'Register',
         style: TextStyle(fontSize: 20, color: Colors.lightGreen),
       ),
       style: ButtonStyle(
@@ -147,6 +163,8 @@ Widget RegisterLoginButton(context) {
       ));
 }
 
+
+//验证码
 Widget SendCode(UserProvider value) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +185,12 @@ Widget SendCode(UserProvider value) {
       Container(
         height: 40,
         padding: EdgeInsets.only(left: 10),
-        child: ElevatedButton(onPressed: () {}, child: Text('Send Code')),
+        child: ElevatedButton(onPressed: () async{
+          var resp = await API().GetCode(value.email);
+          if(resp['code']==200){
+          //  弹窗发送成功
+          }
+        }, child: Text('Send Code')),
       )
     ],
   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:payth/state/shopping_cart.dart';
 import 'package:provider/provider.dart';
+import 'package:payth/net/api.dart';
 
 class RightView extends StatelessWidget {
   const RightView({Key? key}) : super(key: key);
@@ -113,7 +114,7 @@ class RightView extends StatelessWidget {
             MaterialButton(
               minWidth: double.infinity,
               onPressed: () {
-                getTrans(value);
+                dealShopping(value);
               },
               child: const Text(
                 "CONFIRM AND PAY",
@@ -133,9 +134,13 @@ class RightView extends StatelessWidget {
     );
   }
 
-  getTrans(ShoppingCartProvider value) {
-    print(value.totalprice);
-    print(value.currentPaymathod);
-    print(value.emailAddress);
+
+
+  //测试  res的参数id待定
+  dealShopping(ShoppingCartProvider value) async{
+    value.product.forEach((element)async {
+      var resp = await API().AddProduct(element.id, element.quantity);
+    });
+    var res = await API().createShop(value.product[0].id);
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:payth/models/product.dart';
+import 'package:payth/net/api.dart';
 
 class ShoppingCartProvider with ChangeNotifier {
+
+
   List<ProductModel> product = [
     ProductModel(
         id: 0,
@@ -31,11 +34,18 @@ class ShoppingCartProvider with ChangeNotifier {
         price: 60,
         quantity: 0),
   ];
+
+
   double totalprice = 0;
   List<String> paymathodList = ['stripe', 'paypal', 'alipay', 'wechatpay'];
   String currentPaymathod = 'stripe';
   String emailAddress = '';
   late double paymentPrice;
+
+  addProduct(value){
+    product.add(value);
+
+  }
 
   changeCurentPaymethod(v) {
     currentPaymathod = v;
@@ -61,4 +71,7 @@ class ShoppingCartProvider with ChangeNotifier {
     });
     notifyListeners();
   }
+
+
+
 }
