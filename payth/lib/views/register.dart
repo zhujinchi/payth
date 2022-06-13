@@ -193,6 +193,7 @@ Widget SendCode(UserProvider value) {
             var resp = await API().GetCode(value.email);
             if(resp['code']==200){
             //  弹窗发送成功
+              print(resp);
             }
           }, child: Text('Send Code')):Container(height:40,alignment:Alignment.center,child: Text('Resend in '+value.seconds.toString()+ 's',textAlign:TextAlign.center,)),
         ),
