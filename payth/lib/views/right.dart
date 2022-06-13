@@ -160,16 +160,18 @@ class RightView extends StatelessWidget {
 
   //测试  res的参数id待定
   dealShopping(ShoppingCartProvider value) async{
-    print(value.product);
-    value.product.forEach((element)async {
-      if(element.quantity>0){
 
-        var resp = await API().AddProduct(element.productID, element.skuID,element.quantity);
+    for(var i=0;i<value.product.length;i++){
+      if(value.product[i].quantity>0){
+        print(value.product[i]);
+        var resp = await API().AddProduct(value.product[i].productID, value.product[i].skuID,value.product[i].quantity);
+        print(567);
         print(resp);
       }
-    });
+    }
     var res = await API().createShop();
     value.setOrderId(res);
+
     var payUrl = await API().pay(value.orderId);
     js.context.callMethod('open', [payUrl]);
   }
@@ -178,7 +180,7 @@ class RightView extends StatelessWidget {
     Timer t;
     t = Timer.periodic(Duration(milliseconds: 3000), (timer) async{
       value.judgeOrderTimeOut--;
-      var resp = API().getOrder(value.orderId);
+      // var resp = API().getOrder(value.orderId);
       // if(resp.info=='xxx'){
       // //  弹窗购买成功
       //   value.clearProduct();
@@ -188,10 +190,10 @@ class RightView extends StatelessWidget {
       //   //弹窗取消购买
       //   timer.cancel();
       // }
-      // if(value.judgeOrderTimeOut==0){
-      //   // 弹窗购买超时
-      //   timer.cancel();
-      // }
+      if(value.judgeOrderTimeOut==0){
+        // 弹窗购买超时
+        timer.cancel();
+      }
     });
 }
 

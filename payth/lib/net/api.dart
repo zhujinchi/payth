@@ -18,7 +18,7 @@ class API {
     Response response = await dio.get(url, queryParameters: map);
 
     var data = response.data;
-    print(data);
+    // print(data);
 
     return data;
   }
@@ -44,7 +44,7 @@ class API {
     Response response = await dio.post(url, data: formData);
 
     var data = response.data;
-    print(data);
+    // print(data);
 
     return data;
   }
@@ -61,7 +61,7 @@ class API {
 
     Response response = await dio.post(url, data: formData);
     var data = response.data;
-    print(data);
+    // print(data);
 
     return data;
   }
@@ -77,7 +77,7 @@ class API {
       ID_list.add(element['id']);
     });
 
-    print(ID_list);
+    // print(ID_list);
     return ID_list;
   }
 
@@ -89,10 +89,10 @@ class API {
     Dio dio = Dio();
 
     for(int i = 0; i<ID_list.length; i++){
-      print('count'+i.toString());
+      // print('count'+i.toString());
       String url = BASE_IP + '/product/detail/${ID_list[i]}';
       Response response = await dio.get(url);
-      print(response.data);
+      // print(response.data);
       response.data['data']['skuStockList'].forEach((element) {
         Product.add(element);
       });
@@ -102,21 +102,21 @@ class API {
   }
 
   //添加商品到购物车
-  dynamic AddProduct(int id, var skuID, int quantity) async {
+  dynamic AddProduct(var productID, var skuID, var quantity) async {
     String url = BASE_IP + '/cart/add';
     String token = User.shared().token;
 
     Dio dio = Dio();
     dio.options.headers = {'Authorization': 'Bearer ' + token};
 
-    FormData formData = FormData.fromMap({
-      "productId": id,
+    var map = {
+      "productId": productID,
       'productSkuId': skuID,
       'quantity': quantity,
-    });
+    };
 
 
-    Response response = await dio.post(url, data: formData);
+    Response response = await dio.post(url, data: map);
     var data = response.data;
     return data;
   }
@@ -132,9 +132,11 @@ class API {
     // print(789);
     // print(data);
     var goodsID = [];
-    data['data'].forEach((element) {
-      goodsID.add(element['id']);
-    });
+    var ID_list = data['data'];
+    for(var i=0;i<ID_list.length;i++){
+      goodsID.add(ID_list[i]['id']);
+    }
+    print(goodsID);
 
     return goodsID;
   }
@@ -143,17 +145,18 @@ class API {
   dynamic createShop() async {
     String token = User.shared().token;
 
-    var goodsID = getShoppingID();
-    String url = BASE_IP + '/cart/add';
+    var goodsID = await getShoppingID();
+    String url = BASE_IP + '/order/generateOrder';
     Dio dio = Dio();
     dio.options.headers = {'Authorization': 'Bearer ' + token};
 
-    FormData formData = FormData.fromMap({
+    var map = {
       "payType": 3,
       'cartIds': goodsID,
-    });
-    Response response = await dio.post(url, data: formData);
+    };
+    Response response = await dio.post(url, data: map);
     var data = response.data;
+    print(data);
     var orderID = data['data']['order']['id'];
     return orderID;
   }
@@ -161,7 +164,7 @@ class API {
 //  根据orderID 去支付
   dynamic pay(int orderID) async {
     String token = User.shared().token;
-    String url = BASE_IP + 'order/pay/${orderID}';
+    String url = BASE_IP + '/order/pay/${orderID}';
     Dio dio = Dio();
     dio.options.headers = {'Authorization': 'Bearer ' + token};
     var response = await dio.get(url);
