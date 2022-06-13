@@ -3,44 +3,9 @@ import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:payth/models/user.dart';
 
-var BASE_IP = 'http://127.0.0.1';
+var BASE_IP = 'http://attic.vip:8085';
 
 class API {
-  samplePost() async {
-    // sample post
-    // String url = "http://1.14.103.90:5000/paypal_return";
-
-    // ///build Dio
-    // Dio dio = Dio();
-
-    // dio.options.headers['Authorization'] = SystemInfo.shared().token;
-
-    // ///build map
-    // Map<String, dynamic> map = {};
-
-    // map['deal_id'] = User.shared().deal_id;
-    // map['amount_USD'] = amount;
-
-    // ///post
-    // Response response = await dio.post(url, queryParameters: map);
-    // var data = response.data;
-    // print(data);
-
-    //sample get
-    // String url = "http://1.14.103.90:5000/paypal_wallet";
-
-    // ///build Dio
-    // Dio dio = Dio();
-
-    // dio.options.headers['Authorization'] = SystemInfo.shared().token;
-
-    // ///get
-    // Response response = await dio.get(url);
-
-    // var data = response.data;
-
-    // print(data);
-  }
 
   dynamic GetCode(String email) async {
     String url = BASE_IP + "/sso/getAuthCode";
@@ -48,9 +13,9 @@ class API {
     Dio dio = Dio();
 
     Map<String, dynamic> map = {};
-    map['email'] = email;
+    map['telephone'] = email;
 
-    Response response = await dio.post(url, queryParameters: map);
+    Response response = await dio.get(url, queryParameters: map);
 
     var data = response.data;
     print(data);
@@ -69,12 +34,14 @@ class API {
 
     ///build map
     Map<String, dynamic> map = {};
-    map['email'] = email;
-    map['code'] = code;
+    map['telephone'] = email;
+    map['authCode'] = code;
     map['password'] = passwordMd5;
+    map['username'] = email;
 
     ///post
-    Response response = await dio.post(url, queryParameters: map);
+    print('url:'+url);
+    Response response = await dio.post(url, data: map);
 
     var data = response.data;
     print(data);
@@ -87,10 +54,10 @@ class API {
     Dio dio = Dio();
     String passwordMd5 = md5.convert(utf8.encode(password)).toString();
     Map<String, dynamic> map = {};
-    map['email'] = email;
+    map['username'] = email;
     map['password'] = passwordMd5;
 
-    Response response = await dio.post(url, queryParameters: map);
+    Response response = await dio.post(url, data: map);
 
     var data = response.data;
 
@@ -104,7 +71,7 @@ class API {
     String url = BASE_IP + '/brand/recommendList?${token}';
     Dio dio = Dio();
     Response response = await dio.get(url);
-    return response.data['data'];
+    return response.data;
   }
 
   //根据商品ID 获取商品sku
@@ -131,20 +98,34 @@ class API {
     map['productSkuId'] = skuInfo['skuID'];
     map['skuCode'] = skuInfo['skuCode'];
     map['quantity'] = quantity;
-    Response response = await dio.post(url, queryParameters: map);
+    Response response = await dio.post(url, data: map);
     var data = response.data;
     return data;
   }
 
+  //获取购物车ID
+  dynamic getShoppingID() async{
+    String token = User.shared().token;
+    String url = BASE_IP+'/cart/list?${token}';
+    Dio dio = Dio();
+
+    Response response = await dio.get(url);
+    var data = response.data;
+
+    return data['data']['id'];
+
+  }
+
   //生成订单并支付
-  dynamic createShop(int id) async {
+  dynamic createShop() async {
+    var id = getShoppingID();
     String url = BASE_IP + '/cart/add';
     Dio dio = Dio();
     Map<String, dynamic> map = {};
     map['token'] = User.shared().token;
     map['payType'] = 3;
-    map['cartIds'] = id;
-    Response response = await dio.post(url, queryParameters: map);
+    map['cartIds'] = [id];
+    Response response = await dio.post(url, data: map);
     var data = response.data;
     return data;
   }

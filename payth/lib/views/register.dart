@@ -3,10 +3,10 @@ import 'package:payth/state/user_login_register.dart';
 import 'package:payth/views/login.dart';
 import 'package:provider/provider.dart';
 import 'package:payth/net/api.dart';
+import 'dart:async';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,14 +184,35 @@ Widget SendCode(UserProvider value) {
               ))),
       Container(
         height: 40,
+        alignment: Alignment.center,
         padding: EdgeInsets.only(left: 10),
-        child: ElevatedButton(onPressed: () async{
-          var resp = await API().GetCode(value.email);
-          if(resp['code']==200){
-          //  弹窗发送成功
-          }
-        }, child: Text('Send Code')),
+        child: Container(
+          height: 40,
+          child: value.sendCodeButton?ElevatedButton(onPressed: () async{
+            _showTimer(value);
+            var resp = await API().GetCode(value.email);
+            if(resp['code']==200){
+            //  弹窗发送成功
+            }
+          }, child: Text('Send Code')):Container(height:40,alignment:Alignment.center,child: Text('Resend in '+value.seconds.toString()+ 's',textAlign:TextAlign.center,)),
+        ),
       )
     ],
   );
 }
+
+
+_showTimer(UserProvider value){
+  Timer t;
+  t = Timer.periodic(Duration(milliseconds: 1000), (timer) {
+    value.DoSeconds();
+    value.setCodeButtonF();
+    if(value.seconds==0){
+      timer.cancel();
+      value.setCodeButtonT();
+    }
+  });
+
+}
+
+

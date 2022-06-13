@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:payth/state/shopping_cart.dart';
+import 'package:payth/state/user_login_register.dart';
 import 'package:payth/views/product_items.dart';
 import 'package:provider/provider.dart';
 
-class LeftView extends StatelessWidget {
+
+class LeftView extends StatefulWidget {
   const LeftView({Key? key}) : super(key: key);
+
+  @override
+  State<LeftView> createState() => _LeftViewState();
+}
+
+class _LeftViewState extends State<LeftView> {
+
+  @override
+  void initState(){
+    super.initState();
+
+    final provider = context.read<ShoppingCartProvider>();
+    provider.initProduct();
+  }
+
 
   @override
   Widget build(BuildContext context) {

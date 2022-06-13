@@ -169,13 +169,14 @@ Widget RegisterButton(context) {
 Widget LoginButton(context, UserProvider value) {
   return ElevatedButton(
       onPressed: () async {
-        var resp = await API().Login(value.email, value.password);
-        if (resp['code'] == 200) {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomeView()));
-        } else {
-          //  弹框提示账号或密码错误
-        }
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomeView()));
+        // var resp = await API().Login(value.email, value.password);
+        // if (resp['code'] == 200) {
+        //
+        // } else {
+        //   //  弹框提示账号或密码错误
+        // }
       },
       child: Text(
         'Login',

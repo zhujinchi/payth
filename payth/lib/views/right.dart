@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:payth/state/shopping_cart.dart';
 import 'package:provider/provider.dart';
 import 'package:payth/net/api.dart';
+import 'dart:js' as js;
 
 class RightView extends StatelessWidget {
   const RightView({Key? key}) : super(key: key);
@@ -114,7 +115,8 @@ class RightView extends StatelessWidget {
             MaterialButton(
               minWidth: double.infinity,
               onPressed: () {
-                dealShopping(value);
+                js.context.callMethod('open',['http://www.baidu.com']);
+                // dealShopping(value);
               },
               child: const Text(
                 "CONFIRM AND PAY",
@@ -141,6 +143,6 @@ class RightView extends StatelessWidget {
     value.product.forEach((element)async {
       var resp = await API().AddProduct(element.id, element.quantity);
     });
-    var res = await API().createShop(value.product[0].id);
+    var res = await API().createShop();
   }
 }

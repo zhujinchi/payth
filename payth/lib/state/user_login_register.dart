@@ -7,6 +7,21 @@ class UserProvider with ChangeNotifier{
   String confirmPassword = '';
   String code = '';
   bool passwordShow = false;
+  bool sendCodeButton = true;
+  int seconds = 60;
+
+
+  setCodeButtonF(){
+    sendCodeButton = false;
+    notifyListeners();
+  }
+  setCodeButtonT(){
+    sendCodeButton = true;
+    notifyListeners();
+  }
+  DoSeconds(){
+    seconds--;
+  }
 
 
   changePasswordShow(){
