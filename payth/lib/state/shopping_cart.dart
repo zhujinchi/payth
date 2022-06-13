@@ -85,6 +85,18 @@ class ShoppingCartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  clearProduct(){
+    product.forEach((element) {
+      element.quantity = 0;
+    });
+  }
+
+  var orderId = 0;
+  setOrderId(v){
+    orderId = v;
+  }
+  var judgeOrderTimeOut = 120;
+
 
 
 }

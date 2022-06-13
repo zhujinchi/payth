@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:payth/models/user.dart';
+import 'package:payth/net/fluttertoast.dart';
 
 var BASE_IP = 'http://attic.vip:8085';
 
@@ -13,7 +14,7 @@ class API {
     Dio dio = Dio();
 
     Map<String, dynamic> map = {};
-    map['telephone'] = email;
+    map['telephone'] = email.split('@')[0];
 
     Response response = await dio.get(url, queryParameters: map);
 
@@ -30,13 +31,13 @@ class API {
     Dio dio = Dio();
 
     ///md5
-    String passwordMd5 = md5.convert(utf8.encode(password)).toString();
+    // String passwordMd5 = md5.convert(utf8.encode(password)).toString();
 
     ///build map
     Map<String, dynamic> map = {};
-    map['telephone'] = email;
+    map['telephone'] = email.split('@')[0];
     map['authCode'] = code;
-    map['password'] = passwordMd5;
+    map['password'] = password;
     map['username'] = email;
 
     ///post
@@ -50,16 +51,17 @@ class API {
   }
 
   dynamic Login(String email, String password) async {
-    String url = BASE_IP + '/sso/login';
+    // String url = BASE_IP + '/sso/login';
+    String url = 'http://attic.vip:8085/sso/login';
     Dio dio = Dio();
-    String passwordMd5 = md5.convert(utf8.encode(password)).toString();
+    // String passwordMd5 = md5.convert(utf8.encode(password)).toString();
     Map<String, dynamic> map = {};
     map['username'] = email;
-    map['password'] = passwordMd5;
+    map['password'] = password;
 
     Response response = await dio.post(url, data: map);
-
     var data = response.data;
+print(data);
 
 
     return data;
@@ -129,4 +131,18 @@ class API {
     var data = response.data;
     return data;
   }
+
+//  获取订单详情
+dynamic getOrder(int orderId) async{
+  String token = User.shared().token;
+  String url = BASE_IP+'/order/detail';
+    Map<String, dynamic> map = {};
+    map['orderId'] = orderId;
+    map['token'] = token;
+    Dio dio = Dio();
+    Response response =await dio.get(url,queryParameters: map);
+    var data = response.data;
+
+    return data;
+}
 }

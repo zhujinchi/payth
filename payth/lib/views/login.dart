@@ -5,6 +5,7 @@ import 'package:payth/home.dart';
 import 'register.dart';
 import 'forget_password.dart';
 import 'package:payth/net/api.dart';
+import 'package:payth/net/fluttertoast.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -131,7 +132,7 @@ Widget forgetPassword(context) {
       alignment: Alignment.centerRight,
       child: TextButton(
         onPressed: () {
-          // Navigator.pop(context);
+          Navigator.pop(context);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => ForgetPasswordView()));
         },
@@ -169,14 +170,14 @@ Widget RegisterButton(context) {
 Widget LoginButton(context, UserProvider value) {
   return ElevatedButton(
       onPressed: () async {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomeView()));
-        // var resp = await API().Login(value.email, value.password);
-        // if (resp['code'] == 200) {
-        //
-        // } else {
-        //   //  弹框提示账号或密码错误
-        // }
+        print(value.email+value.password);
+        var resp = await API().Login(value.email, value.password);
+        if (resp['code'] == 200) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => HomeView()));
+        } else {
+          //  弹框提示账号或密码错误
+        }
       },
       child: Text(
         'Login',

@@ -39,6 +39,7 @@ dependencies:
   provider:
   crypto: ^3.0.2
   adaptive_dialog: ^1.6.3
+  fluttertoast:
 
 
 dev_dependencies:
