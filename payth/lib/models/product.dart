@@ -3,6 +3,8 @@ import 'dart:convert';
 
 class ProductModel {
   int id;
+  int productID;
+  int skuID;
   String name;
   String categoryName;
   String imgUrl;
@@ -11,6 +13,8 @@ class ProductModel {
   int quantity;
   ProductModel({
     required this.id,
+    required this.productID,
+    required this.skuID,
     required this.name,
     required this.categoryName,
     required this.imgUrl,
@@ -21,6 +25,8 @@ class ProductModel {
 
   ProductModel copyWith({
     int? id,
+    int? productID,
+    int? skuID,
     String? name,
     String? categoryName,
     String? imgUrl,
@@ -30,6 +36,8 @@ class ProductModel {
   }) {
     return ProductModel(
       id: id ?? this.id,
+      productID: productID ?? this.productID,
+      skuID: skuID ?? this.skuID,
       name: name ?? this.name,
       categoryName: categoryName ?? this.categoryName,
       imgUrl: imgUrl ?? this.imgUrl,
@@ -42,6 +50,8 @@ class ProductModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'productID':productID,
+      'skuID':skuID,
       'name': name,
       'categoryName': categoryName,
       'imgUrl': imgUrl,
@@ -54,6 +64,8 @@ class ProductModel {
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'] as int,
+      productID: map['productID'] as int,
+      skuID: map['skuID'] as int,
       name: map['name'] as String,
       categoryName: map['categoryName'] as String,
       imgUrl: map['imgUrl'] as String,
@@ -70,7 +82,7 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, categoryName: $categoryName, imgUrl: $imgUrl, remark: $remark, price: $price, quantity: $quantity)';
+    return 'ProductModel(id: $id, productID:$productID,skuID:$skuID,name: $name, categoryName: $categoryName, imgUrl: $imgUrl, remark: $remark, price: $price, quantity: $quantity)';
   }
 
   @override
@@ -79,6 +91,8 @@ class ProductModel {
 
     return other is ProductModel &&
         other.id == id &&
+        other.productID == productID &&
+        other.skuID == skuID &&
         other.name == name &&
         other.categoryName == categoryName &&
         other.imgUrl == imgUrl &&
@@ -90,6 +104,8 @@ class ProductModel {
   @override
   int get hashCode {
     return id.hashCode ^
+    productID.hashCode ^
+    skuID.hashCode ^
         name.hashCode ^
         categoryName.hashCode ^
         imgUrl.hashCode ^

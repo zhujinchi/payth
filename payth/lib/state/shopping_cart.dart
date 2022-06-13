@@ -3,50 +3,8 @@ import 'package:payth/models/product.dart';
 import 'package:payth/net/api.dart';
 
 class ShoppingCartProvider with ChangeNotifier {
+  List<ProductModel> product = [];
 
-
-  late List<ProductModel> product = [
-    // ProductModel(
-    //     id: 0,
-    //     name: 'card 1',
-    //     categoryName: 'steam',
-    //     remark: '备注',
-    //     imgUrl:
-    //         "https://img.alicdn.com/bao/uploaded/i1/2322816853/O1CN01qro9Zj20UisDcfG4x_!!2322816853.png_240x240.jpg",
-    //     price: 12.5,
-    //     quantity: 0),
-    // ProductModel(
-    //     id: 1,
-    //     name: 'card 2',
-    //     categoryName: 'steam',
-    //     remark: '备注2',
-    //     imgUrl:
-    //         "https://img.alicdn.com/bao/uploaded/i1/2322816853/O1CN01qro9Zj20UisDcfG4x_!!2322816853.png_240x240.jpg",
-    //     price: 12.5,
-    //     quantity: 0),
-    // ProductModel(
-    //     id: 2,
-    //     name: 'card 3',
-    //     categoryName: 'steam',
-    //     remark: '备注3',
-    //     imgUrl:
-    //         "https://img.alicdn.com/bao/uploaded/i1/2322816853/O1CN01qro9Zj20UisDcfG4x_!!2322816853.png_240x240.jpg",
-    //     price: 60,
-    //     quantity: 0),
-  ];
-
-  initProduct()async{
-    var resp = await API().GetProduct();
-    var productList = resp['data']['list'];
-    paymathodList.forEach((element) {
-      // product.add(ProductModel(
-      //   id: element.id;
-      // ));
-
-
-    });
-    print(resp);
-  }
 
 
   double totalprice = 0;
@@ -55,9 +13,33 @@ class ShoppingCartProvider with ChangeNotifier {
   String emailAddress = '';
   late double paymentPrice;
 
-  addProduct(value){
-    product.add(value);
 
+  initProduct() async {
+    List resp = await API().GetProduct();
+    print(resp);
+    resp.forEach((element) {
+      product.add(ProductModel(
+          id: int.parse('0'),
+          productID: element['productId'],
+          skuID: element['id'],
+          name: 'card',
+          categoryName: element['spData'].toString(),
+          remark: element['stock'].toString(),
+          price: element['price'],
+          imgUrl: element['pic'].toString(),
+          quantity: int.parse('0')));
+    });
+    //
+
+
+    for(int i = 0; i<product.length;i++){
+      product[i].id = i;
+    }
+    notifyListeners();
+  }
+
+  addProduct(value) {
+    product.add(value);
   }
 
   changeCurentPaymethod(v) {
@@ -66,6 +48,7 @@ class ShoppingCartProvider with ChangeNotifier {
   }
 
   incrementQuantity(id) {
+
     product[id].quantity++;
     calculateTotalPrice();
   }
@@ -85,18 +68,17 @@ class ShoppingCartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  clearProduct(){
+  clearProduct() {
     product.forEach((element) {
       element.quantity = 0;
     });
   }
 
   var orderId = 0;
-  setOrderId(v){
+
+  setOrderId(v) {
     orderId = v;
   }
+
   var judgeOrderTimeOut = 120;
-
-
-
 }

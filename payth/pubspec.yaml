@@ -40,6 +40,8 @@ dependencies:
   crypto: ^3.0.2
   adaptive_dialog: ^1.6.3
   fluttertoast:
+  popover: ^0.2.6+3
+  webview_flutter: ^2.0.8
 
 
 dev_dependencies:

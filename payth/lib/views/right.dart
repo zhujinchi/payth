@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:payth/net/api.dart';
 import 'dart:async';
 import 'dart:js' as js;
+import 'package:popover/popover.dart';
+import 'package:webview_flutter/webview_flutter.dart' as webview;
 
 class RightView extends StatelessWidget {
   const RightView({Key? key}) : super(key: key);
@@ -121,9 +123,20 @@ class RightView extends StatelessWidget {
                 MaterialButton(
                   minWidth: double.infinity,
                   onPressed: () {
-                    js.context.callMethod('open', ['http://www.baidu.com']);
-                    // dealShopping(value);
-                    judgeOrder(value);
+                    // showPopover(
+                    //   context: context,
+                    //   transitionDuration: const Duration(milliseconds: 150),
+                    //   bodyBuilder: (context) => const WebView(),
+                    //   onPop: () => print('Popover was popped!'),
+                    //   direction: PopoverDirection.top,
+                    //   width: 200,
+                    //   height: 400,
+                    //   arrowHeight: 15,
+                    //   arrowWidth: 30,
+                    // );
+                    // js.context.callMethod('open', ['http://www.baidu.com']);
+                    dealShopping(value);
+                    // judgeOrder(value);
                   },
                   child: const Text(
                     "CONFIRM AND PAY",
@@ -147,11 +160,18 @@ class RightView extends StatelessWidget {
 
   //测试  res的参数id待定
   dealShopping(ShoppingCartProvider value) async{
+    print(value.product);
     value.product.forEach((element)async {
-      var resp = await API().AddProduct(element.id, element.quantity);
+      if(element.quantity>0){
+
+        var resp = await API().AddProduct(element.productID, element.skuID,element.quantity);
+        print(resp);
+      }
     });
     var res = await API().createShop();
-    value.setOrderId(res.id);
+    value.setOrderId(res);
+    var payUrl = await API().pay(value.orderId);
+    js.context.callMethod('open', [payUrl]);
   }
 
   judgeOrder(ShoppingCartProvider value){
@@ -159,18 +179,36 @@ class RightView extends StatelessWidget {
     t = Timer.periodic(Duration(milliseconds: 3000), (timer) async{
       value.judgeOrderTimeOut--;
       var resp = API().getOrder(value.orderId);
-      if(resp.info=='xxx'){
-      //  弹窗购买成功
-        value.clearProduct();
-        timer.cancel();
-      }
-      if(resp.info=='xxx'){
-        //弹窗取消购买
-        timer.cancel();
-      }
-      if(value.judgeOrderTimeOut==0){
-        // 弹窗购买超时
-        timer.cancel();
-      }
+      // if(resp.info=='xxx'){
+      // //  弹窗购买成功
+      //   value.clearProduct();
+      //   timer.cancel();
+      // }
+      // if(resp.info=='xxx'){
+      //   //弹窗取消购买
+      //   timer.cancel();
+      // }
+      // if(value.judgeOrderTimeOut==0){
+      //   // 弹窗购买超时
+      //   timer.cancel();
+      // }
     });
 }
+
+
+class WebView extends StatefulWidget {
+  const WebView({Key? key}) : super(key: key);
+
+  @override
+  State<WebView> createState() => _WebViewState();
+}
+
+class _WebViewState extends State<WebView> {
+  @override
+  Widget build(BuildContext context) {
+    return webview.WebView(
+      initialUrl: 'http://www.baidu.com'
+    );
+  }
+}
+

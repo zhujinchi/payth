@@ -17,9 +17,9 @@ class _LeftViewState extends State<LeftView> {
   @override
   void initState(){
     super.initState();
-
-    final provider = context.read<ShoppingCartProvider>();
+    var provider = context.read<ShoppingCartProvider>();
     provider.initProduct();
+    print(provider.product);
   }
 
 
@@ -64,13 +64,17 @@ class _LeftViewState extends State<LeftView> {
             ],
           ),
           Consumer<ShoppingCartProvider>(builder: (context, value, state) {
-            return ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => ProductItemView(
-                productModel: value.product[index],
+            return Container(
+              height: 700,
+              child: ListView.builder(
+
+                // physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => ProductItemView(
+                  productModel: value.product[index],
+                ),
+                itemCount: value.product.length,
+                shrinkWrap: true,
               ),
-              itemCount: value.product.length,
-              shrinkWrap: true,
             );
           }),
           const Spacer(),

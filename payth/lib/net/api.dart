@@ -33,15 +33,15 @@ class API {
     // String passwordMd5 = md5.convert(utf8.encode(password)).toString();
 
     ///build map
-    Map<String, dynamic> map = {};
-    map['telephone'] = email.split('@')[0];
-    map['authCode'] = code;
-    map['password'] = password;
-    map['username'] = email;
+    FormData formData = FormData.fromMap({
+      "telephone": email.split('@')[0],
+      "authCode": code,
+      'password': password,
+      'username': email,
+    });
 
     ///post
-    print('url:' + url);
-    Response response = await dio.post(url, data: map);
+    Response response = await dio.post(url, data: formData);
 
     var data = response.data;
     print(data);
@@ -49,14 +49,10 @@ class API {
     return data;
   }
 
-  dynamic Login(String email, String password) async {
+  Login(String email, String password) async {
     // String url = BASE_IP + '/sso/login';
     String url = 'http://attic.vip:8085/sso/login';
     Dio dio = Dio();
-    // String passwordMd5 = md5.convert(utf8.encode(password)).toString();
-    // Map<String, dynamic> map = {};
-    // map['username'] = email;
-    // map['password'] = password;
 
     FormData formData = FormData.fromMap({
       "username": email,
@@ -70,39 +66,57 @@ class API {
     return data;
   }
 
+  //获取商品列表id
+  dynamic GetProductID() async {
+    String url = BASE_IP + '/home/content';
+    Dio dio = Dio();
+    Response response = await dio.get(url);
+    List product_list = response.data['data']['hotProductList'];
+    var ID_list = [];
+    product_list.forEach((element) {
+      ID_list.add(element['id']);
+    });
+
+    print(ID_list);
+    return ID_list;
+  }
+
   //获取商品列表
   dynamic GetProduct() async {
     String token = User.shared().token;
-    String url = BASE_IP + '/brand/recommendList?${token}';
+    List ID_list = await GetProductID();
+    List Product = [];
     Dio dio = Dio();
-    Response response = await dio.get(url);
-    return response.data;
-  }
 
-  //根据商品ID 获取商品sku
-  dynamic GetSku(int id) async {
-    String token = User.shared().token;
-    String url = BASE_IP + '/product/detail/${id}?${token}';
-    Dio dio = Dio();
-    Response response = await dio.get(url);
-    Map<String, dynamic> map = {};
-    map['skuCode'] = response.data['data']['skuStockList']['skuCode'];
-    map['skuID'] = response.data['data']['skuStockList']['id'];
-    return map;
+    for(int i = 0; i<ID_list.length; i++){
+      print('count'+i.toString());
+      String url = BASE_IP + '/product/detail/${ID_list[i]}';
+      Response response = await dio.get(url);
+      print(response.data);
+      response.data['data']['skuStockList'].forEach((element) {
+        Product.add(element);
+      });
+    }
+
+    return Product;
   }
 
   //添加商品到购物车
-  dynamic AddProduct(int id, int quantity) async {
+  dynamic AddProduct(int id, var skuID, int quantity) async {
     String url = BASE_IP + '/cart/add';
-    var skuInfo = await GetSku(id);
+    String token = User.shared().token;
+
     Dio dio = Dio();
-    Map<String, dynamic> map = {};
-    map['token'] = User.shared().token;
-    map['id'] = id;
-    map['productSkuId'] = skuInfo['skuID'];
-    map['skuCode'] = skuInfo['skuCode'];
-    map['quantity'] = quantity;
-    Response response = await dio.post(url, data: map);
+    dio.options.headers = {'Authorization': 'Bearer ' + token};
+
+    FormData formData = FormData.fromMap({
+      "productId": id,
+      'productSkuId': skuID,
+      'quantity': quantity,
+    });
+
+
+    Response response = await dio.post(url, data: formData);
     var data = response.data;
     return data;
   }
@@ -110,27 +124,48 @@ class API {
   //获取购物车ID
   dynamic getShoppingID() async {
     String token = User.shared().token;
-    String url = BASE_IP + '/cart/list?${token}';
+    String url = BASE_IP + '/cart/list';
     Dio dio = Dio();
-
-    Response response = await dio.get(url);
+    dio.options.headers = {'Authorization': 'Bearer ' + token};
+    Response response = await dio.get(url = url);
     var data = response.data;
+    // print(789);
+    // print(data);
+    var goodsID = [];
+    data['data'].forEach((element) {
+      goodsID.add(element['id']);
+    });
 
-    return data['data']['id'];
+    return goodsID;
   }
 
   //生成订单并支付
   dynamic createShop() async {
-    var id = getShoppingID();
+    String token = User.shared().token;
+
+    var goodsID = getShoppingID();
     String url = BASE_IP + '/cart/add';
     Dio dio = Dio();
-    Map<String, dynamic> map = {};
-    map['token'] = User.shared().token;
-    map['payType'] = 3;
-    map['cartIds'] = [id];
-    Response response = await dio.post(url, data: map);
+    dio.options.headers = {'Authorization': 'Bearer ' + token};
+
+    FormData formData = FormData.fromMap({
+      "payType": 3,
+      'cartIds': goodsID,
+    });
+    Response response = await dio.post(url, data: formData);
     var data = response.data;
-    return data;
+    var orderID = data['data']['order']['id'];
+    return orderID;
+  }
+
+//  根据orderID 去支付
+  dynamic pay(int orderID) async {
+    String token = User.shared().token;
+    String url = BASE_IP + 'order/pay/${orderID}';
+    Dio dio = Dio();
+    dio.options.headers = {'Authorization': 'Bearer ' + token};
+    var response = await dio.get(url);
+    return response.data['data'];
   }
 
 //  获取订单详情
@@ -139,8 +174,8 @@ class API {
     String url = BASE_IP + '/order/detail';
     Map<String, dynamic> map = {};
     map['orderId'] = orderId;
-    map['token'] = token;
     Dio dio = Dio();
+    dio.options.headers = {'Authorization': 'Bearer ' + token};
     Response response = await dio.get(url, queryParameters: map);
     var data = response.data;
 

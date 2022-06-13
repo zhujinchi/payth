@@ -5,7 +5,7 @@ import 'package:payth/home.dart';
 import 'register.dart';
 import 'forget_password.dart';
 import 'package:payth/net/api.dart';
-import 'package:payth/net/fluttertoast.dart';
+import 'package:payth/models/user.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -173,6 +173,8 @@ Widget LoginButton(context, UserProvider value) {
         print(value.email+value.password);
         var resp = await API().Login(value.email, value.password);
         if (resp['code'] == 200) {
+          User.shared().token = resp['data']['token'];
+          User.shared().email = value.email;
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => HomeView()));
         } else {
