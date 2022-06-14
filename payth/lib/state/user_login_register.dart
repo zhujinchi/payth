@@ -19,7 +19,9 @@ class UserProvider with ChangeNotifier{
 
   setShowCode(v){
     showCode = v;
+    // 刷新
     notifyListeners();
+
   }
   setCodeButtonT(){
     sendCodeButton = true;
