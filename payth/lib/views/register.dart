@@ -194,8 +194,11 @@ Widget SendCode(UserProvider value) {
             if(resp['code']==200){
             //  弹窗发送成功
               print(resp);
+              value.setShowCode(resp['data']);
+            }else{
+            //  验证码发送失败
             }
-          }, child: Text('Send Code')):Container(height:40,alignment:Alignment.center,child: Text('Resend in '+value.seconds.toString()+ 's',textAlign:TextAlign.center,)),
+          }, child: Text('Send Code')):Container(height:40,alignment:Alignment.center,child: Text('填入'+value.showCode,textAlign:TextAlign.center,)),
         ),
       )
     ],
