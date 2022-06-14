@@ -171,15 +171,15 @@ class API {
     return response.data['data'];
   }
 
-//  获取订单详情
+
+
+//  获取订单支付详情
   dynamic getOrder(int orderId) async {
     String token = User.shared().token;
-    String url = BASE_IP + '/order/detail';
-    Map<String, dynamic> map = {};
-    map['orderId'] = orderId;
+    String url = BASE_IP + '/order/check/${orderId}';
     Dio dio = Dio();
     dio.options.headers = {'Authorization': 'Bearer ' + token};
-    Response response = await dio.get(url, queryParameters: map);
+    Response response = await dio.get(url);
     var data = response.data;
 
     return data;

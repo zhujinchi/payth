@@ -180,16 +180,16 @@ class RightView extends StatelessWidget {
     Timer t;
     t = Timer.periodic(Duration(milliseconds: 3000), (timer) async{
       value.judgeOrderTimeOut--;
-      // var resp = API().getOrder(value.orderId);
-      // if(resp.info=='xxx'){
-      // //  弹窗购买成功
-      //   value.clearProduct();
-      //   timer.cancel();
-      // }
-      // if(resp.info=='xxx'){
-      //   //弹窗取消购买
-      //   timer.cancel();
-      // }
+      var resp = API().getOrder(value.orderId);
+      if(resp.info=='xxx'){
+      //  弹窗购买成功
+        value.clearProduct();
+        timer.cancel();
+      }
+      if(resp.info=='xxx'){
+        //弹窗取消购买
+        timer.cancel();
+      }
       if(value.judgeOrderTimeOut==0){
         // 弹窗购买超时
         timer.cancel();
