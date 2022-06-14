@@ -7,8 +7,8 @@ import 'package:payth/net/fluttertoast.dart';
 var BASE_IP = 'http://attic.vip:8085';
 
 class API {
-  dynamic GetCode(String email) async {
-    String url = BASE_IP + "/sso/getAuthCode";
+  dynamic GetCodeImg(String email) async {
+    String url = BASE_IP + "/sso/captcha.jpg";
 
     Dio dio = Dio();
 
@@ -34,7 +34,7 @@ class API {
 
     ///build map
     FormData formData = FormData.fromMap({
-      "telephone": email.split('@')[0],
+      "uuid": email.split('@')[0],
       "authCode": code,
       'password': password,
       'username': email,

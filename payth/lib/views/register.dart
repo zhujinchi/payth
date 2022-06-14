@@ -184,21 +184,18 @@ Widget SendCode(UserProvider value) {
               ))),
       Container(
         height: 40,
+        width: 120,
         alignment: Alignment.center,
         padding: EdgeInsets.only(left: 10),
         child: Container(
           height: 40,
           child: value.sendCodeButton?ElevatedButton(onPressed: () async{
-            _showTimer(value);
-            var resp = await API().GetCode(value.email);
-            if(resp['code']==200){
-            //  弹窗发送成功
-              print(resp);
-              value.setShowCode(resp['data']);
+            if(value.email==''||(!value.email.contains('@'))){
+            //  弹窗‘请输入正确的邮箱’
             }else{
-            //  验证码发送失败流程
+              _showTimer(value);
             }
-          }, child: Text('Send Code')):Container(height:40,alignment:Alignment.center,child: Text('填入'+value.showCode,textAlign:TextAlign.center,)),
+          }, child: Text('Get Code')):Container(height:40,alignment:Alignment.center,child:Image.network('http://attic.vip:8085/sso/captcha.jpg?uuid=${value.email.split('@')[0]}',width: 100,height: 40,fit: BoxFit.fill,)),
         ),
       )
     ],
