@@ -196,7 +196,7 @@ Widget SendCode(UserProvider value) {
               print(resp);
               value.setShowCode(resp['data']);
             }else{
-            //  验证码发送失败
+            //  验证码发送失败流程
             }
           }, child: Text('Send Code')):Container(height:40,alignment:Alignment.center,child: Text('填入'+value.showCode,textAlign:TextAlign.center,)),
         ),
