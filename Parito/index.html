@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About us - Zairito - eCommerce HTML Template</title>
-    <meta name="description" content="Zairito - eCommerce" />
+    <title>About us - Attic - eCommerce HTML Template</title>
+    <meta name="description" content="Attic - eCommerce" />
     <meta name="keywords"
         content="business,eCommerce, Ecommerce, ecommerce, shop, shopify, shopify ecommerce, creative, woocommerce, design, gallery, minimal, modern, html, html5, responsive" />
-    <meta name="author" content="Zairito" />
+    <meta name="author" content="Attic" />
 
     <!-- fonts file -->
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap"
@@ -47,7 +47,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4">
                         <div class="header-top-left">
-                            <p class="contact-info"><i class="icon flaticon-phone"></i> Call Us: +777 2345 7885 (FREE)
+                            <p class="contact-info"><i class="icon"></i>  
                             </p>
                         </div>
                     </div>
@@ -82,15 +82,15 @@
             <div class="container">
                 <div class="header-middle-wrap">
                     <div class="brand-area">
-                        <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Zairito.png"
-                                alt="Zairito" /></a>
+                        <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Attic.png"
+                                alt="Attic" /></a>
                     </div>
                     <div class="search-area">
                         <form>
                             <div class="search-wrap">
                                 <select class="form-select">
                                     <option selected>Category</option>
-                                    <option value="1">Steam Card</option>
+                                    <option value="1">Gift Card</option>
 
                                 </select>
                                 <div class="form-group">
@@ -102,16 +102,16 @@
                         </form>
                     </div>
                     <div class="header-right">
-                        <div class="cart single-btn">
+                        <div class="cart single-btn" id="indexCartButton">
                             <a data-bs-toggle="offcanvas" href="#cartOffcanvasSidebar" role="button"
                                 aria-controls="cartOffcanvasSidebar" class="cart-btn header-btn">
                                 <div class="btn-left">
                                     <i class="btn-icon flaticon-shopping-bag"></i>
-                                    <span class="count">10</span>
+                                    <span class="count">0</span>
                                 </div>
                                 <div class="btn-right">
                                     <span class="btn-text">Your Cart</span>
-                                    <span class="price">$92.56</span>
+                                    <span class="price">$0</span>
                                 </div>
                             </a>
                         </div>
@@ -124,30 +124,7 @@
                 <ul class="main-menu">
                     <li class="menu-item active"><a class="menu-link" href="index.html">Home</a></li>
                     <li class="menu-item mega-menu-parent">
-                        <a class="menu-link" href="#">Shop <i class="arrow-icon fas fa-angle-down"></i></a>
-                        <div class="mega-menu-area">
-                            <div class="container">
-                                <ul class="mega-menu">
-                                    <li class="mega-menu-item">
-                                        <a class="mega-menu-title" href="#">Shop Layout</a>
-                                        <ul class="menu-items">
-                                            <li class="mega-menu-items"><a class="mega-menu-link"
-                                                    href="shop-grid.html">Shop Grid</a></li>
-
-                                            <li class="mega-menu-items"><a class="mega-menu-link"
-                                                    href="shop-list.html">Shop List</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item">
-                                        <a class="mega-menu-banner" href="shop-grid.html">
-                                            <img class="menu-banner-image" src="assets/images/mega-menu-banner.png"
-                                                alt="mega-menu-banner" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <a class="menu-link" href="shop-list.html">Shop </a>
                     </li>
 
                     <li class="menu-item menu-item-has-children">
@@ -182,8 +159,8 @@
         <div class="container">
             <div class="menu-wrap">
                 <div class="header-left">
-                    <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Zairito.png"
-                            alt="Zairito" /></a>
+                    <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Attic.png"
+                            alt="Attic" /></a>
                 </div>
                 <div class="header-right">
 
@@ -207,8 +184,8 @@
     <div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="offcanvasMobileMenu">
         <div class="mobile-menu-area">
             <div class="offcanvas-header">
-                <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Zairito.png"
-                        alt="Zairito" /></a>
+                <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Attic.png"
+                        alt="Attic" /></a>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
@@ -217,7 +194,7 @@
                     <div class="search-wrap">
                         <select class="form-select">
                             <option selected>Category</option>
-                            <option value="1">Steam Card</option>
+                            <option value="1">Gift Card</option>
                         </select>
                         <div class="form-group">
                             <input type="text" class="form-control" id="mobilesearch" name="search"
@@ -285,10 +262,10 @@
         </div>
         <div class="offcanvas-body">
 
-            <div class="cart-product-list">
+            <div class="cart-product-list" id="indexCartProductList">
 
                 <!-- Product item start -->
-                <div class="product-item cart-product-item">
+                <!-- <div class="product-item cart-product-item">
                     <div class="single-grid-product">
                         <div class="product-top">
                             <a href="single-product.html"><img class="product-thumbnal"
@@ -315,11 +292,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Product item end -->
 
                 <!-- Product item start -->
-                <div class="product-item cart-product-item">
+                <!-- <div class="product-item cart-product-item">
                     <div class="single-grid-product">
                         <div class="product-top">
                             <a href="single-product.html"><img class="product-thumbnal"
@@ -346,14 +323,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Product item end -->
             </div>
 
             <div class="total-bottom-part">
                 <div class="total-count d-flex">
                     <h3>Total</h3>
-                    <h4>$567.00</h4>
+                    <h4 id="indexCartTotalPrice">$0</h4>
                 </div>
                 <a href="checkout.html" class="proceed-to-btn d-block text-center">
                     Proceed To Checkout
@@ -448,7 +425,7 @@
     <!-- hero-section area end here  -->
 
     <!-- brads area start here  -->
-    <div class="brads-area">
+    <!-- <div class="brads-area">
         <div class="container">
             <div class="brads-slide">
                 <div class="sigle-brad">
@@ -479,7 +456,7 @@
                     <img src="assets/images/circle.png" alt="brad image" />
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <!-- brads area start here  -->
 
@@ -505,8 +482,8 @@
                                 <i class="icon flaticon-pants"></i>
                             </div>
                             <div class="categorie-info">
-                                <h3 class="categorie-name">Jeans Collections</h3>
-                                <h4 class="categorie-subtitle">Dress For Man And Women</h4>
+                                <!-- <h3 class="categorie-name">Jeans Collections</h3> -->
+                                <h4 class="categorie-subtitle">Dress For Man</h4>
                             </div>
                         </div>
                         <i class="arrow flaticon-right-arrow"></i>
@@ -519,8 +496,8 @@
                                 <i class="icon flaticon-blazer"></i>
                             </div>
                             <div class="categorie-info">
-                                <h3 class="categorie-name">Blazers Collection</h3>
-                                <h4 class="categorie-subtitle">Dress For Man And Women</h4>
+                                <!-- <h3 class="categorie-name">Blazers Collection</h3> -->
+                                <h4 class="categorie-subtitle">Dress For Women</h4>
                             </div>
                         </div>
                         <i class="arrow flaticon-right-arrow"></i>
@@ -533,8 +510,8 @@
                                 <i class="icon flaticon-hoodie"></i>
                             </div>
                             <div class="categorie-info">
-                                <h3 class="categorie-name">Hoodie Colection</h3>
-                                <h4 class="categorie-subtitle">Dress For Man And Women</h4>
+                                <!-- <h3 class="categorie-name">Hoodie Colection</h3> -->
+                                <h4 class="categorie-subtitle">Dress For Kid</h4>
                             </div>
                         </div>
                         <i class="arrow flaticon-right-arrow"></i>
@@ -555,7 +532,7 @@
                         <h2 class="section-title">Featured Products</h2>
                     </div>
                     <div class="col-md-6 align-self-end text-md-end">
-                        <a href="shop-grid.html" class="see-btn">See All</a>
+                        <!-- <a href="shop-list.html" class="see-btn">See All</a> -->
                     </div>
                 </div>
             </div>
@@ -567,254 +544,21 @@
     <!-- Featured Products area end here  -->
 
     <!-- About Area start here  -->
-    <div class="about-area section">
-        <div class="container">
-            <div class="section-header-area">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="sub-title">About Us</h3>
-                        <h2 class="section-title">The Story Of Borning <br /> Company Zairito</h2>
-                    </div>
-                    <div class="col-md-6 align-self-end text-md-end">
-                        <a href="about-us.html" class="primary-btn">Know More Abou Us</a>
-                    </div>
-                </div>
-            </div>
-            <div class="story-box-slide">
-                <div class="single-story-box">
-                    <h3 class="story-title">Story Of <span class="story-year">2016</span></h3>
-                    <p class="story-content">Quisque velit nisi, pretium ut lacinia in, elementum id elementum id enim.
-                        Nulla porttitor accumssan tincidunt. Donec rutrum congue leo eget malew susada. Cras ultricies
-                        ligula sed magna dictum </p>
-                </div>
-                <div class="single-story-box">
-                    <h3 class="story-title">Story Of <span class="story-year">2017</span></h3>
-                    <p class="story-content">Quisque velit nisi, pretium ut lacinia in, elementum id elementum id enim.
-                        Nulla porttitor accumssan tincidunt. Donec rutrum congue leo eget malew susada. Cras ultricies
-                        ligula sed magna dictum </p>
-                </div>
-                <div class="single-story-box">
-                    <h3 class="story-title">Story Of <span class="story-year">2018</span></h3>
-                    <p class="story-content">Quisque velit nisi, pretium ut lacinia in, elementum id elementum id enim.
-                        Nulla porttitor accumssan tincidunt. Donec rutrum congue leo eget malew susada. Cras ultricies
-                        ligula sed magna dictum </p>
-                </div>
-                <div class="single-story-box">
-                    <h3 class="story-title">Story Of <span class="story-year">2019</span></h3>
-                    <p class="story-content">Quisque velit nisi, pretium ut lacinia in, elementum id elementum id enim.
-                        Nulla porttitor accumssan tincidunt. Donec rutrum congue leo eget malew susada. Cras ultricies
-                        ligula sed magna dictum </p>
-                </div>
-                <div class="single-story-box">
-                    <h3 class="story-title">Story Of <span class="story-year">2020</span></h3>
-                    <p class="story-content">Quisque velit nisi, pretium ut lacinia in, elementum id elementum id enim.
-                        Nulla porttitor accumssan tincidunt. Donec rutrum congue leo eget malew susada. Cras ultricies
-                        ligula sed magna dictum </p>
-                </div>
-                <div class="single-story-box">
-                    <h3 class="story-title">Story Of <span class="story-year">2021</span></h3>
-                    <p class="story-content">Quisque velit nisi, pretium ut lacinia in, elementum id elementum id enim.
-                        Nulla porttitor accumssan tincidunt. Donec rutrum congue leo eget malew susada. Cras ultricies
-                        ligula sed magna dictum </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About Area  end here  -->
-
-    <!-- product banenr area start here  -->
-    <div class="product-banner section-top pb-100">
-        <div class="container">
-            <div class="section-header-area">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="sub-title">account now</h3>
-                        <h2 class="section-title">News Of Our Account</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <a href="shop-list.html" class="single-banner"><img class="banner-image"
-                            src="assets/images/product-banner-1.jpg" alt="product-banner" /></a>
-                </div>
-                <div class="col-md-7">
-                    <a href="shop-list.html" class="single-banner"><img class="banner-image"
-                            src="assets/images/product-banner-2.jpg" alt="product-banner" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- product banenr area end here  -->
-
-    <!-- Image Gallery area start here  -->
-    <div class="image-gallery-area section-top pb-110">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="section-header-area">
-                        <h3 class="sub-title">Image Gallery</h3>
-                        <h2 class="section-title">Image Gallery To Zairito For Making Better Online Shopping Experience
-                        </h2>
-                    </div>
-
-                    <div class="single-gallery">
-                        <img class="gallery-image" src="assets/images/gallery-1.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-1.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                    <div class="single-gallery big-height">
-                        <img class="gallery-image" src="assets/images/gallery-2.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-2.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="single-gallery">
-                        <img class="gallery-image" src="assets/images/gallery-3.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-3.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                    <div class="single-gallery">
-                        <img class="gallery-image" src="assets/images/gallery-4.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-4.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                    <div class="single-gallery">
-                        <img class="gallery-image" src="assets/images/gallery-5.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-5.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="single-gallery">
-                        <img class="gallery-image" src="assets/images/gallery-6.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-6.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                    <div class="single-gallery">
-                        <img class="gallery-image" src="assets/images/gallery-7.jpg" alt="gallery" />
-                        <div class="popuo-overlay">
-                            <a class="popup-image" href="assets/images/gallery-7.jpg"><i
-                                    class="view-icon flaticon-view"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Image Gallery area end here  -->
-
+    
     <!-- Testimonial ara start here  -->
     <div class="testimonial-area section section-bg">
         <div class="container">
             <div class="section-header-area text-center">
                 <h3 class="sub-title">Testimonial</h3>
                 <h2 class="section-title">What People Are <br />Saying About Oursalve</h2>
-                <p>Praesent sapien massa, convallis a pellentesque nec, egestas
-                    Vivamus magna justo, lacinia eget consectetur sed</p>
+                <p>I had an excellent shopping experience . A great platform to shopping</p>
             </div>
-
-            <div class="testimonial-slide-top">
-
-                <!-- Testimonial authors Float Images Start -->
-                <img src="assets/images/testimonial-images/l-1.png" alt="img"
-                    class="testimonial-float-img testimonial-left-1 position-absolute">
-                <img src="assets/images/testimonial-images/l-2.png" alt="img"
-                    class="testimonial-float-img testimonial-left-2 position-absolute">
-                <img src="assets/images/testimonial-images/l-3.png" alt="img"
-                    class="testimonial-float-img testimonial-left-3 position-absolute">
-                <img src="assets/images/testimonial-images/l-4.png" alt="img"
-                    class="testimonial-float-img testimonial-left-4 position-absolute">
-                <img src="assets/images/testimonial-images/r-1.png" alt="img"
-                    class="testimonial-float-img testimonial-right-1 position-absolute">
-                <img src="assets/images/testimonial-images/r-2.png" alt="img"
-                    class="testimonial-float-img testimonial-right-2 position-absolute">
-                <img src="assets/images/testimonial-images/r-3.png" alt="img"
-                    class="testimonial-float-img testimonial-right-3 position-absolute">
-                <img src="assets/images/testimonial-images/r-4.png" alt="img"
-                    class="testimonial-float-img testimonial-right-4 position-absolute">
-                <!-- Testimonial authors Float Images End -->
-
-                <img class="shape-image" src="assets/images/shape.png" alt="shape" />
-                <div class="testimonial-image-slide">
-                    <div class="signle-testimonial-image"><img class="testimonial-image"
-                            src="assets/images/testimonal-image-1.png" alt="testimonal-image" /></div>
-                    <div class="signle-testimonial-image"><img class="testimonial-image"
-                            src="assets/images/testimonal-image-2.png" alt="testimonal-image" /></div>
-                    <div class="signle-testimonial-image"><img class="testimonial-image"
-                            src="assets/images/testimonal-image-3.png" alt="testimonal-image" /></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="testimonail-slide">
-                        <div class="single-testimonial">
-                            <p class="testimonial-text">Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit,
-                                eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh. Proin eget tortor risus.
-                                Proin eget tortor risus. Curabitur arcu</p>
-                            <h3 class="testimonial-title">Andrew Franklin Saimond</h3>
-                            <ul class="review-area">
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="single-testimonial">
-                            <p class="testimonial-text">Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit,
-                                eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh. Proin eget tortor risus.
-                                Proin eget tortor risus. Curabitur arcu</p>
-                            <h3 class="testimonial-title">Bndrew Aranklin</h3>
-                            <ul class="review-area">
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="single-testimonial">
-                            <p class="testimonial-text">Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit,
-                                eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh. Proin eget tortor risus.
-                                Proin eget tortor risus. Curabitur arcu</p>
-                            <h3 class="testimonial-title">Dndrew Jaimond</h3>
-                            <ul class="review-area">
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                                <li><i class="flaticon-star"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
     <!-- Testimonial ara end here  -->
 
     <!-- shop map area start here  -->
-    <div class="shop-map-area">
+    <!-- <div class="shop-map-area">
         <div class="shop-info">
             <div class="shop-info-left">
                 <h2 class="shop-info-title">Local Pickup Available</h2>
@@ -833,7 +577,7 @@
                 src="http://ditu.google.cn/maps/embed?pb=!1m18!1m12!1m3!1d1839.0179632416985!2d89.5538504127622!3d22.801132631062536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff8f2b1098bf95%3A0xbce09c90b98f8380!2sJust%20Orders%20Khulna!5e0!3m2!1sen!2sbd!4v1636005141952!5m2!1sen!2sbd"
                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-    </div>
+    </div> -->
     <!-- shop map area start here  -->
 
     <!-- footer area start here -->
@@ -845,13 +589,13 @@
                         <div class="single-widget about-widget">
                             <a href="index.html" class="footer-brand-logo mb-25"><img
                                     src="assets/images/footer-logo.png" alt="footer-logo" /></a>
-                            <p class="address-text">685 Market Street <br /> San Francisco, CA 94105, <br />United
-                                States</p>
+                            <!-- <p class="address-text">685 Market Street <br /> San Francisco, CA 94105, <br />United
+                                States</p> -->
                             <div class="block-content mb-30">
-                                <p class="contact">Call us: 1.800.000.6690</p>
-                                <p class="contact">Email: support@zainikthemes.com</p>
+                                <!-- <p class="contact">Call us: 1.800.000.6690</p> -->
+                                <p class="contact">Email: support@attic.com</p>
                             </div>
-                            <ul class="social-media">
+                            <!-- <ul class="social-media">
                                 <li class="social-media-item"><a class="social-media-link" href="javascript:void(0)"><i
                                             class="fab fa-facebook-f"></i></a></li>
                                 <li class="social-media-item"><a class="social-media-link" href="javascript:void(0)"><i
@@ -862,7 +606,7 @@
                                             class="fab fa-linkedin-in"></i></a></li>
                                 <li class="social-media-item"><a class="social-media-link" href="javascript:void(0)"><i
                                             class="fab fa-instagram"></i></a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-8 col-md-8 col-sm-8">
@@ -871,7 +615,7 @@
                                 <div class="single-widget">
                                     <h3 class="widget-title">Shop by</h3>
                                     <ul class="widget-menu show">
-                                        <li class="menu-item"><a class="menu-link" href="shop-grid.html">Steam Card</a>
+                                        <li class="menu-item"><a class="menu-link" href="shop-grid.html">Gift Card</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -955,9 +699,9 @@
                             <div class="row">
                                 <div class="col-lg-7 col-md-12">
                                     <div class="offer_modal_left">
-                                        <img src="assets/images/Zairito.png" alt="logo">
+                                        <img src="assets/images/Attic.png" alt="logo">
                                         <h3>SUBSCRIBE TO NEWSLETTER</h3>
-                                        <p class="m-0">Subscribe to the Zairito mailing list to receive updates
+                                        <p class="m-0">Subscribe to the Attic mailing list to receive updates
                                             on new arrivals, special offers and our promotions.</p>
                                         <form>
                                             <div class="input-group mb-3">

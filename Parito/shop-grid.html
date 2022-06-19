@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About us - Zairito - eCommerce HTML Template</title>
-    <meta name="description" content="Zairito - eCommerce" />
+    <title>About us - Attic - eCommerce HTML Template</title>
+    <meta name="description" content="Attic - eCommerce" />
     <meta name="keywords"
         content="business,eCommerce, Ecommerce, ecommerce, shop, shopify, shopify ecommerce, creative, woocommerce, design, gallery, minimal, modern, html, html5, responsive" />
-    <meta name="author" content="Zairito" />
+    <meta name="author" content="Attic" />
 
     <!-- fonts file -->
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap"
@@ -29,9 +29,16 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 
+
+    <script src="./assets/js/jquery-3.6.0.min.js">
+        $('#cartButton').bind('click', function () {
+            console.log(123);
+        })
+    </script>
+
 </head>
 
-<body>
+<body id="ProductItemBody">
     <!-- Preloader Area Start -->
     <div id="preloader">
         <div id="status">
@@ -47,7 +54,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4">
                         <div class="header-top-left">
-                            <p class="contact-info"><i class="icon flaticon-phone"></i> Call Us: +777 2345 7885 (FREE)
+                            <p class="contact-info"><i class="icon"></i>  
                             </p>
                         </div>
                     </div>
@@ -82,15 +89,15 @@
             <div class="container">
                 <div class="header-middle-wrap">
                     <div class="brand-area">
-                        <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Zairito.png"
-                                alt="Zairito" /></a>
+                        <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Attic.png"
+                                alt="Attic" /></a>
                     </div>
                     <div class="search-area">
                         <form>
                             <div class="search-wrap">
                                 <select class="form-select">
                                     <option selected>Category</option>
-                                    <option value="1">Steam Card</option>
+                                    <option value="1">Gift Card</option>
 
                                 </select>
                                 <div class="form-group">
@@ -102,16 +109,16 @@
                         </form>
                     </div>
                     <div class="header-right">
-                        <div class="cart single-btn">
+                        <div class="cart single-btn" id="cartButton">
                             <a data-bs-toggle="offcanvas" href="#cartOffcanvasSidebar" role="button"
                                 aria-controls="cartOffcanvasSidebar" class="cart-btn header-btn">
                                 <div class="btn-left">
                                     <i class="btn-icon flaticon-shopping-bag"></i>
-                                    <span class="count">10</span>
+                                    <span class="count">0</span>
                                 </div>
                                 <div class="btn-right">
                                     <span class="btn-text">Your Cart</span>
-                                    <span class="price">$92.56</span>
+                                    <span class="price">$0</span>
                                 </div>
                             </a>
                         </div>
@@ -124,32 +131,8 @@
                 <ul class="main-menu">
                     <li class="menu-item"><a class="menu-link" href="index.html">Home</a></li>
                     <li class="menu-item mega-menu-parent">
-                        <a class="menu-link" href="#">Shop <i class="arrow-icon fas fa-angle-down"></i></a>
-                        <div class="mega-menu-area">
-                            <div class="container">
-                                <ul class="mega-menu">
-                                    <li class="mega-menu-item">
-                                        <a class="mega-menu-title" href="#">Shop Layout</a>
-                                        <ul class="menu-items">
-                                            <li class="mega-menu-items"><a class="mega-menu-link"
-                                                    href="shop-grid.html">Shop Grid</a></li>
-
-                                            <li class="mega-menu-items"><a class="mega-menu-link"
-                                                    href="shop-list.html">Shop List</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item">
-                                        <a class="mega-menu-banner" href="shop-grid.html">
-                                            <img class="menu-banner-image" src="assets/images/mega-menu-banner.png"
-                                                alt="mega-menu-banner" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <a class="menu-link" href="shop-list.html">Shop </a>
                     </li>
-
                     <li class="menu-item menu-item-has-children">
                         <a class="menu-link" href="#">Pages <i class="arrow-icon fas fa-angle-down"></i></a>
                         <ul class="sub-menu">
@@ -182,8 +165,8 @@
         <div class="container">
             <div class="menu-wrap">
                 <div class="header-left">
-                    <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Zairito.png"
-                            alt="Zairito" /></a>
+                    <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Attic.png"
+                            alt="Attic" /></a>
                 </div>
                 <div class="header-right">
 
@@ -207,8 +190,8 @@
     <div class="offcanvas offcanvas-start menu-offcanvas" tabindex="-1" id="offcanvasMobileMenu">
         <div class="mobile-menu-area">
             <div class="offcanvas-header">
-                <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Zairito.png"
-                        alt="Zairito" /></a>
+                <a class="brand-logo" href="index.html"><img class="brand-image" src="assets/images/Attic.png"
+                        alt="Attic" /></a>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
@@ -217,7 +200,7 @@
                     <div class="search-wrap">
                         <select class="form-select">
                             <option selected>Category</option>
-                            <option value="1">Steam Card</option>
+                            <option value="1">Gift Card</option>
                         </select>
                         <div class="form-group">
                             <input type="text" class="form-control" id="mobilesearch" name="search"
@@ -285,10 +268,10 @@
         </div>
         <div class="offcanvas-body">
 
-            <div class="cart-product-list">
+            <div class="cart-product-list" id="cartProductList">
 
                 <!-- Product item start -->
-                <div class="product-item cart-product-item">
+                <!-- <div class="product-item cart-product-item">
                     <div class="single-grid-product">
                         <div class="product-top">
                             <a href="single-product.html"><img class="product-thumbnal"
@@ -315,45 +298,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Product item end -->
 
-                <!-- Product item start -->
-                <div class="product-item cart-product-item">
-                    <div class="single-grid-product">
-                        <div class="product-top">
-                            <a href="single-product.html"><img class="product-thumbnal"
-                                    src="assets/images/cart-sidebar-img2.png" alt="cart"></a>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name-part">
-                                <h4 class="product-catagory">New - Collections</h4>
-                                <h3 class="product-name"><a class="product-link" href="single-product.html">Premier Bag
-                                        Jean</a></h3>
 
-                                <div class="cart-quantity input-group">
-                                    <div class="increase-btn dec qtybutton btn">-</div>
-                                    <input class="qty-input cart-plus-minus-box" type="text" name="qtybutton" value="1"
-                                        readonly />
-                                    <div class="increase-btn inc qtybutton btn">+</div>
-                                </div>
-
-                                <button class="cart-remove-btn">Remove</button>
-                            </div>
-                            <div class="product-price">
-                                <span class="regular-price">$215.08</span>
-                                <span class="price">$150.08</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product item end -->
             </div>
 
             <div class="total-bottom-part">
                 <div class="total-count d-flex">
                     <h3>Total</h3>
-                    <h4>$567.00</h4>
+                    <h4 id="cartTotalPrice">$0</h4>
                 </div>
                 <a href="checkout.html" class="proceed-to-btn d-block text-center">
                     Proceed To Checkout
@@ -401,7 +355,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="product-filter">
+                        <!-- <div class="product-filter">
                             <p class="shoing-result">Showing 1 - 9 of 9 result</p>
                             <form>
                                 <select class="form-select">
@@ -411,7 +365,7 @@
                                     <option value="3">Tags</option>
                                 </select>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -483,7 +437,7 @@
 
 
                 </div>
-                <div class="pagination-area mt-30">
+                <!-- <div class="pagination-area mt-30">
                     <ul class="paginations text-center">
                         <li class="pagination-page"><a href="#" class="pagination-link"><i
                                     class="fas fa-angle-double-left"></i></a></li>
@@ -493,7 +447,7 @@
                         <li class="pagination-page"><a href="#" class="pagination-link"><i
                                     class="fas fa-angle-double-right"></i></a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -776,7 +730,7 @@
     <!-- Product Area End -->
 
     <!-- shop map area start here -->
-    <div class="shop-map-area">
+    <!-- <div class="shop-map-area">
         <div class="shop-info">
             <div class="shop-info-left">
                 <h2 class="shop-info-title">Local Pickup Available</h2>
@@ -795,7 +749,7 @@
                 src="http://ditu.google.cn/maps/embed?pb=!1m18!1m12!1m3!1d1839.0179632416985!2d89.5538504127622!3d22.801132631062536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff8f2b1098bf95%3A0xbce09c90b98f8380!2sJust%20Orders%20Khulna!5e0!3m2!1sen!2sbd!4v1636005141952!5m2!1sen!2sbd"
                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-    </div>
+    </div> -->
     <!-- shop map area start here -->
 
     <!-- footer area start here -->
@@ -807,13 +761,13 @@
                         <div class="single-widget about-widget">
                             <a href="index.html" class="footer-brand-logo mb-25"><img
                                     src="assets/images/footer-logo.png" alt="footer-logo" /></a>
-                            <p class="address-text">685 Market Street <br /> San Francisco, CA 94105, <br />United
-                                States</p>
+                            <!-- <p class="address-text">685 Market Street <br /> San Francisco, CA 94105, <br />United
+                                States</p> -->
                             <div class="block-content mb-30">
-                                <p class="contact">Call us: 1.800.000.6690</p>
-                                <p class="contact">Email: support@zainikthemes.com</p>
+                                <!-- <p class="contact">Call us: 1.800.000.6690</p> -->
+                                <p class="contact">Email: support@attic.com</p>
                             </div>
-                            <ul class="social-media">
+                            <!-- <ul class="social-media">
                                 <li class="social-media-item"><a class="social-media-link" href="javascript:void(0)"><i
                                             class="fab fa-facebook-f"></i></a></li>
                                 <li class="social-media-item"><a class="social-media-link" href="javascript:void(0)"><i
@@ -824,7 +778,7 @@
                                             class="fab fa-linkedin-in"></i></a></li>
                                 <li class="social-media-item"><a class="social-media-link" href="javascript:void(0)"><i
                                             class="fab fa-instagram"></i></a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-8 col-md-8 col-sm-8">
@@ -833,7 +787,7 @@
                                 <div class="single-widget">
                                     <h3 class="widget-title">Shop by</h3>
                                     <ul class="widget-menu show">
-                                        <li class="menu-item"><a class="menu-link" href="shop-grid.html">Steam Card</a>
+                                        <li class="menu-item"><a class="menu-link" href="shop-grid.html">Gift Card</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -917,9 +871,9 @@
                             <div class="row">
                                 <div class="col-lg-7 col-md-12">
                                     <div class="offer_modal_left">
-                                        <img src="assets/images/Zairito.png" alt="logo">
+                                        <img src="assets/images/Attic.png" alt="logo">
                                         <h3>SUBSCRIBE TO NEWSLETTER</h3>
-                                        <p class="m-0">Subscribe to the Zairito mailing list to receive updates
+                                        <p class="m-0">Subscribe to the Attic mailing list to receive updates
                                             on new arrivals, special offers and our promotions.</p>
                                         <form>
                                             <div class="input-group mb-3">
